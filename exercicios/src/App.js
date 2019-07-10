@@ -17,7 +17,7 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <Simples texto="Flexível!!!"/>  
-                <ParImpar numero={32}/>
+                <ParImpar numero={33}/>
                 <Inverter texto="React Native"/>
                 <MegaSena numeros={8}/>
             </View>
