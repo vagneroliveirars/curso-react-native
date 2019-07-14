@@ -14,6 +14,11 @@ export default class Contador extends Component {
         numero: this.props.numeroInicial
     }
  
+    /**
+     * Quando usado numa arrow function o this nunca varia, sempre é uma instância 
+     * do componente. Quando usuado numa função tradicional, o this varia de acordo
+     * de quem chamou a função.
+     */
     maisUm = () => this.setState({ numero: this.state.numero + 1 })
 
     limpar = () => this.setState({ numero: 0 })
