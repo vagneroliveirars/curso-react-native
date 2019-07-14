@@ -1,10 +1,11 @@
-import React from "react"
+import React from 'react'
 import { createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
 
-import Simples from "./componentes/Simples"
-import ParImpar from "./componentes/ParImpar"
-import { Inverter, MegaSena } from "./componentes/Multi"
-import Contador from "./componentes/Contador"
+import Simples from './componentes/Simples'
+import ParImpar from './componentes/ParImpar'
+import { Inverter, MegaSena } from './componentes/Multi'
+import Contador from './componentes/Contador'
+import Plataformas from './componentes/Plataformas'
 
 /* export default createDrawerNavigator({
     MegaSena: {
@@ -48,6 +49,9 @@ const App = createAppContainer(MainNavigator);
 export default App; */
 
 const MainNavigator = createDrawerNavigator({
+    Plataformas: {
+        screen: Plataformas
+    },
     Contador: {
         screen: () => <Contador numeroInicial={100}/>
     },
