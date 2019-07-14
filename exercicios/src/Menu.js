@@ -1,10 +1,10 @@
 import React from "react"
-import { createDrawerNavigator } from 'react-navigation'
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createAppContainer, createDrawerNavigator } from 'react-navigation';
 
-import Simples from "./componentes/Simples";
-import ParImpar from "./componentes/ParImpar";
-import { Inverter, MegaSena } from "./componentes/Multi";
+import Simples from "./componentes/Simples"
+import ParImpar from "./componentes/ParImpar"
+import { Inverter, MegaSena } from "./componentes/Multi"
+import Contador from "./componentes/Contador"
 
 /* export default createDrawerNavigator({
     MegaSena: {
@@ -25,7 +25,7 @@ import { Inverter, MegaSena } from "./componentes/Multi";
 
 }, { drawerWidth: 300 }) */
 
-const RootStack = createStackNavigator({
+/* const MainNavigator = createStackNavigator({
     MegaSena: {
         // É necessário usar arrow function para passar parâmetros para o componente
         screen: () => <MegaSena numeros={8} />,
@@ -43,6 +43,31 @@ const RootStack = createStackNavigator({
     }
 });
 
-const App = createAppContainer(RootStack);
+const App = createAppContainer(MainNavigator);
+
+export default App; */
+
+const MainNavigator = createDrawerNavigator({
+    Contador: {
+        screen: () => <Contador numeroInicial={100}/>
+    },
+    MegaSena: {
+        // É necessário usar arrow function para passar parâmetros para o componente
+        screen: () => <MegaSena/>,
+        navigationOptions: { title: 'Mega Sena' }
+    },
+    Inverter: {
+        screen: () => <Inverter texto='React Native!' />
+    },
+    ParImpar: {
+        screen: () => <ParImpar numero={30} />,
+        navigationOptions: { title: 'Par & Ímpar' }
+    },
+    Simples: {
+        screen: () => <Simples texto='Flexível' />
+    }
+}, { drawerWidth: 300 });
+
+const App = createAppContainer(MainNavigator);
 
 export default App;
