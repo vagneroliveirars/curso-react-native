@@ -27,7 +27,18 @@ const itemEstilo = {
     height: 50,
     backgroundColor: '#DDD',
     borderWidth: 0.5,
-    borderColor: '#222'
+    borderColor: '#222',
+
+    // Flex: main acess é a coluna
+    // alignItems trabalha o alinhamento no cross access
+    alignItems: 'center',
+    //alignItems: 'flex-end'
+    //alignItems: 'flex-start',
+    // justifyContent trabalha o alinhamento no main access
+    // justifyContent: 'space-around'
+    // Mudando o main access para linha
+    flexDirection: 'row',
+    justifyContent: 'space-between'
 }
 
 export const Aluno = props => 
