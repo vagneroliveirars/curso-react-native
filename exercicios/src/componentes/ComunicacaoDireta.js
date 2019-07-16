@@ -3,6 +3,11 @@ import { View, Text } from 'react-native'
 
 const fonte = { style: { fontSize: 30 } }
 
+function filhosComProps(props) {
+    return React.Children.map(props.children,
+        c => React.cloneElement(c, {...props, ...c.props}))
+}
+
 export const Filho = props =>
     /** 
      * Operador spread {...fonte} (espalha as propriedades da constante fonte 
@@ -22,6 +27,10 @@ export const Pai = props =>
              * funciona se o pai tive um único filho. Com mais de um elemento não funciona.
              */
             // React.cloneElement(props.children, {...props, ...props.children})
+        }
+        {
+            // Usando esta estratégia funciona quando o componente pai tem mais de 1 filho
+            filhosComProps(props)
         }
     </View>
 
