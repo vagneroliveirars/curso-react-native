@@ -18,12 +18,13 @@ export default class App extends Component {
   addDigit = n => {
     console.debug(typeof this.state.displayValue)
 
+    const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay
+
     // Ignora mais de um ponto
-    if (n === '.' && this.state.displayValue.includes('.')) {
+    if (n === '.' && !clearDisplay && this.state.displayValue.includes('.')) {
       return
     }
-    
-    const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay
+
     const currentValue = clearDisplay ? '' : this.state.displayValue
     const displayValue = currentValue + n
     this.setState({ displayValue, clearDisplay: false })
