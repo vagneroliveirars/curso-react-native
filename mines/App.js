@@ -13,6 +13,11 @@ const App = () => {
       <Text>Iniciando o Mines!</Text>
       <Text>Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}</Text>
       <Field/>
+      <Field open/>
+      <Field open nearMines={1}/>
+      <Field open nearMines={2}/>
+      <Field open nearMines={3}/>
+      <Field open nearMines={6}/>
     </View>   
   )
 }
