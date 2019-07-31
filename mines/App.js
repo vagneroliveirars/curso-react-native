@@ -18,6 +18,9 @@ const App = () => {
       <Field open nearMines={2}/>
       <Field open nearMines={3}/>
       <Field open nearMines={6}/>
+      <Field mined/>
+      <Field mined open/>
+      <Field mined open exploded/>
     </View>   
   )
 }

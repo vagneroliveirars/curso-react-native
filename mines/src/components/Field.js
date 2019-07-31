@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import params from '../Params';
+import Mine from './Mine';
 
 export default props => {
     /**
@@ -9,10 +10,11 @@ export default props => {
      * ou objetos em variáveis distintas. Nesse caso, esperamos receber dentro de 
      * props os atributos mined, open e nearMines
      */
-    const { mined, open, nearMines } = props 
+    const { mined, open, nearMines, exploded } = props 
     
     const styleField = [styles.field]
     if (open) styleField.push(styles.open)
+    if (exploded) styleField.push(styles.exploded)
     if (styleField.length === 1) styleField.push(styles.regular)
 
     // Muda a cor do texto conforme a quantidade minas para sinalizar o grau de "perigo"
@@ -29,6 +31,8 @@ export default props => {
             {!mined && open && nearMines > 0
             ? <Text style={[styles.label, { color: color }]}>{nearMines}</Text>
             : false}
+
+            {mined && open ? <Mine/> : false}
         </View>
     )
 }
@@ -55,5 +59,9 @@ const styles = StyleSheet.create({
     label: {
         fontWeight: 'bold',
         fontSize: params.fontSize
+    },
+    exploded: {
+        backgroundColor: 'red',
+        borderColor: 'red'
     }
 })
