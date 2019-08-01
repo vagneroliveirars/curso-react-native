@@ -21,6 +21,8 @@ const App = () => {
       <Field mined/>
       <Field mined open/>
       <Field mined open exploded/>
+      <Field flagged/>
+      <Field flagged open/>
     </View>   
   )
 }
