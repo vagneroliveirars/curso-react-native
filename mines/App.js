@@ -1,11 +1,7 @@
-import React from 'react'
-import {
-  StyleSheet,
-  View,
-  Text
-} from 'react-native'
-import params from './src/Params'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import Field from './src/components/Field';
+import params from './src/Params';
 
 const App = () => {
   return (
