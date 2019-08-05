@@ -27,24 +27,24 @@ const createBoard = (rows, columns) => {
  * @param {*} minesAmount 
  */
 const spreadMines = (board, minesAmount) => {
-    const rows = board.lenght;
-    const columns = board[0].lenght
+    const rows = board.length
+    const columns = board[0].length
     let minesPlanted = 0
 
+    /**
+     * Seleciona aleatoriamente o número da linha 
+     * e da coluna na base decimal para implantar a mina
+     */
     while (minesPlanted < minesAmount) {
-        /**
-         * Seleciona aleatoriamente o número da linha 
-         * e da coluna na base decimal para implantar a mina
-         */
         const rowSelected = parseInt(Math.random() * rows, 10)
-        const columnSelected = parseInt(Math.random() * colums, 10)
+        const columnSelected = parseInt(Math.random() * columns, 10)
 
         /**
          * Verifica se a linha e coluna selecionada já está minada.
          * Se já estiver minada, ignora e vai para a próxima, senão 
          * planta a mina na posição e incrementa o quantidade de
          * minas plantadas.
-         * */ 
+         * */
         if (!board[rowSelected][columnSelected].mined) {
             board[rowSelected][columnSelected].mined = true
             minesPlanted++
