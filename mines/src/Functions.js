@@ -108,47 +108,28 @@ const getNeighbors = (board, row, column) => {
  * @param {*} column 
  */
 const safeNeighborhood = (board, row, column) => {
+    // Função usando a lógica do reduce: 
+    // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
     const safes = (result, neighbor) => result && !neighbor.mined
     return getNeighbors(board, row, column).reduce(safes, true)
 }
-// const safeNeighborhood = (board, row, column) => {
-//     // Função usando a lógica do reduce: 
-//     // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
-//     const safes = (result, neighbor) => result && !neighbor.mined
-//     return getNeighbors(board, row, column).reduce(safes, true)
-// }
 
-// const openField = (board, row, column) => {
-//     const field = board[row][column]
-//     if (!field.open) {
-//         field.open = true
-//         if (field.mined) {
-//             field.exploded = true
-//         } else {
-//             const neighbors = getNeighbors(board, row, column)
-//             if (safeNeighborhood(board, row, column)) {
-//                 // Se a vizinhança for segura, abre os vizinhos ao redor recursivamente
-//                 neighbors(board, row, column)
-//                     .forEach(neighbor => openField(board, neighbor.row, neighbor.column))
-//             } else {
-//                 // Se a vizinhança não é segura, conta quantas minhas tem ao redor do campo
-//                 field.nearMines = neighbors.filter(n => n.mined).length
-//             }
-//         }
-//     }
-// }
 const openField = (board, row, column) => {
     const field = board[row][column]
-    if (!field.opened) {
-        field.opened = true
+    if (!field.open) {
+        field.open = true
         if (field.mined) {
             field.exploded = true
-        } else if (safeNeighborhood(board, row, column)) {
-            getNeighbors(board, row, column)
-                .forEach(n => openField(board, n.row, n.column))
         } else {
             const neighbors = getNeighbors(board, row, column)
-            field.nearMines = neighbors.filter(n => n.mined).length
+            if (safeNeighborhood(board, row, column)) {
+                // Se a vizinhança for segura, abre os vizinhos ao redor recursivamente
+                neighbors
+                    .forEach(neighbor => openField(board, neighbor.row, neighbor.column))
+            } else {
+                // Se a vizinhança não é segura, conta quantas minhas tem ao redor do campo
+                field.nearMines = neighbors.filter(n => n.mined).length
+            }
         }
     }
 }
