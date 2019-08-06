@@ -90,7 +90,7 @@ const getNeighbors = (board, row, column) => {
         columns.forEach(c => {
             const different = r != row || c != column
             const validRow = r >= 0 && r < board.length
-            const validColumn = r >= 0 && c < board[0].length
+            const validColumn = c >= 0 && c < board[0].length
             if (different && validRow && validColumn) {
                 neighbors.push(board[r][c])
             }
@@ -107,8 +107,6 @@ const getNeighbors = (board, row, column) => {
  * @param {*} row 
  * @param {*} column 
  */
-
-
 const safeNeighborhood = (board, row, column) => {
     const safes = (result, neighbor) => result && !neighbor.mined
     return getNeighbors(board, row, column).reduce(safes, true)
