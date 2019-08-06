@@ -15,7 +15,9 @@ export default props => {
              * Transforma o objeto field do array em um componente Field, 
              * retornando um array de JSX
              */ 
-            return <Field { ...field} key={c} onOpen={() => props.onOpenField(r, c)}/>
+            return <Field { ...field} key={c} 
+                onOpen={() => props.onOpenField(r, c)}
+                onSelect={() => props.onSelectField(r, c)}/>
         })
         return <View style={{flexDirection: 'row'}} key={r}>{columns}</View>
     })
