@@ -8,9 +8,11 @@ import {
   hasExplosion,
   wonGame,
   showMines,
-  invertFlag
+  invertFlag,
+  flagsUsed
 } from './src/Functions';
 import params from './src/Params';
+import Header from './src/components/Header';
 
 export default class App extends Component {
 
@@ -68,8 +70,8 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Iniciando o Mines!</Text>
-        <Text>Tamanho da grade: {params.getRowsAmount()}x{params.getColumnsAmount()}</Text>
+        <Header flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
+          onNewGame={() => this.setState(this.createState())}/>
         <View style={styles.board}>
           <MineField board={this.state.board} 
             onOpenField={this.onOpenField} 

@@ -164,6 +164,13 @@ const invertFlag = (board, row, column) => {
     field.flagged = !field.flagged
 }
 
+/**
+ * Retorna a quantidade de campos marcados com flag no tabuleiro
+ * 
+ * @param {*} board 
+ */
+const flagsUsed = board => fields(board).filter(field => field.flagged).length
+
 export { 
     createMinedBoard,
     cloneBoard,
@@ -171,5 +178,6 @@ export {
     hasExplosion,
     wonGame,
     showMines,
-    invertFlag
+    invertFlag,
+    flagsUsed
 }
