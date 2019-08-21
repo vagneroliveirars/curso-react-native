@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF'
   },
   welcome: {
+    fontFamily: CommonStyles.fontFamily,
     fontSize: 20,
     textAlign: 'center',
     margin: 10
