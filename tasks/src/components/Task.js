@@ -11,7 +11,7 @@ import CommonStyles from '../CommonStyles';
 
 export default props => {
     let check = null
-    if (props.doneAt !== null) {
+    if (props.doneAt) {
         check = (
             <View style={styles.done}>
                 <Icon name='check' size={20} color={CommonStyles.colors.secondary}/>
@@ -22,14 +22,57 @@ export default props => {
     }
 
     // Estilo de linha cortada se a data 'doneAt' estiver preenchida
-    const descStyle = props.doneAt != null ? { textDecorationLine: 'line-through'} : {}
+    const descStyle = props.doneAt ? { textDecorationLine: 'line-through'} : {}
 
     return (
         <View style={styles.container}>
             <View style={styles.checkContainer}>{check}</View>
             <View>
-                <Text>{props.desc}</Text>
+                <Text style={[styles.description, descStyle]}>{props.desc}</Text>
+                <Text style={styles.date}>
+                    {moment(props.estimateAt).locale('pt-br').format('ddd, D [de] MMMM')}
+                </Text>
             </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        paddingVertical: 10,
+        flexDirection: 'row',
+        // Uma linha separando as tarefas
+        borderBottomWidth: 1,
+        borderColor: '#AAA'
+    },
+    checkContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '20%'
+    },
+    pending: {
+        borderWidth: 1,
+        height: 25,
+        width: 25,
+        borderRadius: 15,
+        borderColor: '#555'
+    },
+    done: {
+        height: 25,
+        width: 25,
+        borderRadius: 15,
+        backgroundColor: '#4D7031',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    description: {
+        fontFamily: CommonStyles.fontFamily,
+        color: CommonStyles.colors.mainText,
+        fontSize: 15
+    },
+    date: {
+        fontFamily: CommonStyles.fontFamily,
+        color: CommonStyles.colors.subText,
+        fontSize: 12
+    }
+})
