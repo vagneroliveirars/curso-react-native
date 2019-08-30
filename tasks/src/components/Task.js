@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  TouchableWithoutFeedback
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import moment from 'moment'
@@ -25,8 +26,12 @@ export default props => {
     const descStyle = props.doneAt ? { textDecorationLine: 'line-through'} : {}
 
     return (
+        // Ignorando o parâmetro evento na função onPress={() => ...} do componente TouchableWithoutFeedback
+        // Fizemos isso para pegar o id da task como parâmetro e não o evento
         <View style={styles.container}>
-            <View style={styles.checkContainer}>{check}</View>
+            <TouchableWithoutFeedback onPress={() => props.toogleTask(props.id)}>
+                <View style={styles.checkContainer}>{check}</View>
+            </TouchableWithoutFeedback>
             <View>
                 <Text style={[styles.description, descStyle]}>{props.desc}</Text>
                 <Text style={styles.date}>

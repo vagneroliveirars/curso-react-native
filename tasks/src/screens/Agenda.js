@@ -30,8 +30,20 @@ export default class Agenda extends Component {
             { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
             { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
             { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() }            
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() }
         ]
+    }
+
+    toogleTask = id => {
+        const tasks = this.state.tasks
+            .map(task => {
+                if (task.id === id) {
+                    task.doneAt = task.doneAt ? null : new Date()
+                }
+                return task
+            })
+
+        this.setState({ tasks })
     }
 
     render() {
@@ -48,7 +60,7 @@ export default class Agenda extends Component {
                 <View style={styles.taskContainer}>
                     <FlatList data={this.state.tasks}
                         keyExtractor={item => `${item.id}`}
-                        renderItem={({ item }) => <Task {...item}/>}/>
+                        renderItem={({ item }) => <Task {...item} toogleTask={this.toogleTask}/>} />
                 </View>
             </View>
         )
