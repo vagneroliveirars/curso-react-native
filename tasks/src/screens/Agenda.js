@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground
+    StyleSheet,
+    Text,
+    View,
+    ImageBackground,
+    FlatList
 } from 'react-native';
 import moment from 'moment'
 /**
@@ -16,6 +17,23 @@ import CommonStyles from '../CommonStyles';
 import Task from '../components/Task';
 
 export default class Agenda extends Component {
+    state = {
+        tasks: [
+            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
+            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
+            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
+            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
+            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
+            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() }            
+        ]
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -28,18 +46,9 @@ export default class Agenda extends Component {
                     </View>
                 </ImageBackground>
                 <View style={styles.taskContainer}>
-                    <Task desc='Tarefa pendente' estimateAt={new Date()}/>
-                    <Task desc='Tarefa concluída' estimateAt={new Date()} doneAt={new Date()}/>
-                    <Task desc='Tarefa pendente' estimateAt={new Date()}/>
-                    <Task desc='Tarefa concluída' estimateAt={new Date()} doneAt={new Date()}/>
-                    <Task desc='Tarefa pendente' estimateAt={new Date()}/>
-                    <Task desc='Tarefa concluída' estimateAt={new Date()} doneAt={new Date()}/>
-                    <Task desc='Tarefa pendente' estimateAt={new Date()}/>
-                    <Task desc='Tarefa concluída' estimateAt={new Date()} doneAt={new Date()}/>
-                    <Task desc='Tarefa pendente' estimateAt={new Date()}/>
-                    <Task desc='Tarefa concluída' estimateAt={new Date()} doneAt={new Date()}/>
-                    <Task desc='Tarefa pendente' estimateAt={new Date()}/>
-                    <Task desc='Tarefa concluída' estimateAt={new Date()} doneAt={new Date()}/>
+                    <FlatList data={this.state.tasks}
+                        keyExtractor={item => `${item.id}`}
+                        renderItem={({ item }) => <Task {...item}/>}/>
                 </View>
             </View>
         )
