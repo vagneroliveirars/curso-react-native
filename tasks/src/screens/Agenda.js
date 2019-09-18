@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Platform
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import moment from 'moment'
 import ActionButton from 'react-native-action-button'
@@ -23,20 +24,7 @@ import AddTask from './AddTask';
 
 export default class Agenda extends Component {
     state = {
-        tasks: [
-            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
-            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
-            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
-            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
-            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() },
-            { id: Math.random(), desc: 'Comprar o curso de React Native', estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o curso', estimateAt: new Date() }
-        ],
+        tasks: [],
         visibleTasks: [],
         showDoneTasks: true,
         showAddTask: false
@@ -68,6 +56,7 @@ export default class Agenda extends Component {
         }
 
         this.setState({ visibleTasks })
+        AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
     }
 
     toogleFilter = () => {
@@ -94,9 +83,21 @@ export default class Agenda extends Component {
     /**
      * Método do ciclo de vida do React.
      * Called immediately after a component is mounted. Setting state here will trigger re-rendering.
+     * async torna a função assíncrona
      */
-    componentDidMount = () => {
-        this.filterTasks()
+    componentDidMount = async () => {
+        /**
+         * Busca as tasks do AsyncStorage. 
+         * await dá um comportamento síncrono, forçando esperar terminar a busca das tasks
+         */
+        const data = await AsyncStorage.getItem('tasks')
+        /**
+         * Transforma o data em um array da tasks. Se o data estiver vazio, 
+         * monta um array vazio como default, usando || []
+         */
+        const tasks = JSON.parse(data) || []
+
+        this.setState({ tasks }, this.filterTasks)
     }
 
     render() {
